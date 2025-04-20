@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Models\MockData\MockList;
+use App\Models\Job;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -21,8 +22,12 @@ Route::get('/', function () {
 // --
 
 Route::get('/jobs', function () {
+    // $datas = MockList::getMockList();
+    // $datas = MockList::getMockListEloquentCollection();
+    $datas = Job::all();
+    dd($datas->first()->title);
     return view('jobs', [
-        'datas' => MockList::getMockList(),
+        'datas' => $datas,
     ]);
 });
 

@@ -2,6 +2,10 @@
 
 namespace App\Models\MockData;
 
+use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use Illuminate\Database\Eloquent\Model;
+
 class MockList
 {
     public static function getMockList(): array
@@ -74,5 +78,33 @@ class MockList
     {
         $mockList = collect(self::getMockList());
         return $mockList->firstWhere('id', $id) ?: null;
+    }
+
+    /**
+     * Return the mock list as a Laravel Collection.
+     */
+    public static function getMockListCollection(): Collection
+    {
+        return collect(self::getMockList());
+    }
+
+    /**
+     * Return the mock list as an Eloquent Collection of generic models.
+     */
+    public static function getMockListEloquentCollection(): EloquentCollection
+    {
+        $models = array_map(function ($item) {
+            $model = new class($item) extends Model {
+                protected $fillable = ['id', 'title', 'detail', 'salary'];
+                public function __construct(array $attributes = [])
+                {
+                    parent::__construct($attributes);
+                    $this->setRawAttributes($attributes, true);
+                }
+            };
+            return $model;
+        }, self::getMockList());
+
+        return new EloquentCollection($models);
     }
 }
