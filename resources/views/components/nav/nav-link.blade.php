@@ -1,7 +1,6 @@
-@props(['active' => false, 'href' => '/'])
+@props(['active' => false])
 
-
-<a href="{{ $href }}" class="{{ $active ? 'bg-red-200' : '' }} 
+<a class="{{ $active ? 'bg-red-200' : '' }} 
 	mr-4 text-blue-700 hover:underline" {{ $attributes }}>
     {{ $slot }}
 </a>

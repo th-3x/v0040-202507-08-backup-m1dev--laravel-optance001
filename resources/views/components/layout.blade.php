@@ -18,11 +18,15 @@
         {{-- <x-nav.nav-link href="/" :active="true">Home</x-nav.nav-link> --}}
         {{-- <x-nav.nav-link href="/" :active="false">Home</x-nav.nav-link> --}}
 
-        <x-nav.nav-link href="/" active="{{ request()->is('/') }}">Home</x-nav.nav-link>
-        <x-nav.nav-link href="/about" active="{{ request()->is('about') }}">About</x-nav.nav-link>
+        <x-nav.nav-link href="/" :active="request()->is('/')">Home</x-nav.nav-link>
+        <x-nav.nav-link href="/about" :active="request()->is('about')">About</x-nav.nav-link>
+
+        <x-nav.nav-link href="/jobs" :active="request()->is('jobs')">Jobs</x-nav.nav-link>
     </nav>
 
-    <header>{{ $heading }}</header>
+    <header class="bg-gradient-to-r from-red-500 to-pink-500 text-white py-20 flex flex-col items-center justify-center">
+        <h1 class="text-5xl font-bold mb-4">{{ $heading }}</h1>
+    </header>
 
     <main>
         {{ $slot }}
