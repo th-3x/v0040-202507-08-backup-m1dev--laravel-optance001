@@ -2,7 +2,7 @@
 
 namespace App\Models\MockData;
 
-use Illuminate\Support\Collection;
+// use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Database\Eloquent\Model;
 
@@ -83,9 +83,12 @@ class MockList
     /**
      * Return the mock list as a Laravel Collection.
      */
-    public static function getMockListCollection(): Collection
+    public static function getMockListCollection(): EloquentCollection
     {
-        return collect(self::getMockList());
+        $objects = array_map(function ($item) {
+            return (object) $item;
+        }, self::getMockList());
+        return new EloquentCollection($objects);
     }
 
     /**

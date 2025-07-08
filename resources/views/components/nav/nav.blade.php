@@ -1,5 +1,3 @@
-{{-- TODO: comps nav --}}
-
 <nav class="flex items-center justify-between bg-[#3b6ba5] px-6 py-4 text-white">
 	<!-- Logo and nav -->
 	<div class="flex items-center space-x-10">

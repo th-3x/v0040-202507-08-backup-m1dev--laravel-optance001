@@ -23,9 +23,15 @@ Route::get('/', function () {
 
 Route::get('/jobs', function () {
     // $datas = MockList::getMockList();
+    // $datas = MockList::getMockListCollection();
     // $datas = MockList::getMockListEloquentCollection();
+
     $datas = Job::all();
-    dd($datas->first()->title);
+    
+    // dd($datas);
+    // dd($datas->first());
+    // dd($datas->first()->title);
+
     return view('jobs', [
         'datas' => $datas,
     ]);
